@@ -7,28 +7,15 @@ import { Book } from '../common/book';
 @Injectable({
   providedIn: 'root'
 })
-export class BookService implements OnInit {
+export class BookService {
 
-  private configUrl = "assets/data/config.json";
-
-  constructor(private httpClient: HttpClient) {
-    this.ngOnInit();
-  }
-  ngOnInit(): void {
-    this.getJSON().subscribe(data => {
-      localStorage.setItem("onlineBackEndBaseURL", data["onlineBackEndBaseURL"]);
-    });
-  }
-
-  public getJSON(): Observable<any> {
-    return this.httpClient.get(this.configUrl)
-  }
+  private baseUrl:string = environment.apiUrl;
+  constructor(private httpClient: HttpClient) {}
 
   getBooks(categoryId: Number): Observable<Book[]> {
-     let baseUrl = localStorage.getItem('onlineBackEndBaseURL');
-     console.log('baseUrl :'+ baseUrl);
-     return this.httpClient.get<BooksResponseMapping>(baseUrl + '/search/categoryid?id=' + categoryId).pipe(
-      map(response => response._embedded.books)
+     console.log('Backend Base Url :'+ this.baseUrl);
+     return this.httpClient.get<BooksResponseMapping>(this.baseUrl + '/search/categoryid?id=' + categoryId).pipe(
+       map(response => response._embedded.books)
     );
   }
 
