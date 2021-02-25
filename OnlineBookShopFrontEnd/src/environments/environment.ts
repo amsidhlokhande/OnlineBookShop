@@ -3,7 +3,10 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  apiUrl: window["env"]["apiUrl"] || "http://localhost:8282/onlineshop/books",
+  debug: window["env"]["debug"] || false
+
 };
 
 /*
