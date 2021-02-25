@@ -1,0 +1,19 @@
+version: "3.7"
+services:
+  bookshop-backend-service:
+    container_name: bookshop-backend
+    image: adithilokhande/onlinebookshopbackend:0.0.1-SNAPSHOT
+    ports:
+    - "8181:8181"
+    restart: always
+  bookshop-frontend-service:
+      container_name: bookshop-frontend
+      image: adithilokhande/onlinebookshopfrontend:0.0.1-SNAPSHOT
+      ports:
+        - target: 80
+          published: 80
+          protocol: tcp
+      restart: always
+      depends_on: # This start the dependent service first
+        - bookshop-backend-service
+
