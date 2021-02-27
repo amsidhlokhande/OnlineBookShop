@@ -22,20 +22,20 @@ spec:
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
-  name: onlineshop-frontend-virtual-service-account
+  name: onlineshop-frontend-virtual-service
 spec:
-  hosts:
-    - "*"
   gateways:
-    - onlineshop-frontend-gateway
+  - onlineshop-frontend-gateway
+  hosts:
+  - "*"
   http:
-    - match:
-        - uri:
-            prefix: /online-shop
-      route:
-        - destination:
-            host: onlineshop-frontend
-            port:
-              number: 8080
+  - match:
+    - uri:
+        prefix: /onlineshop-ui
+    route:
+    - destination:
+        host: onlineshop-frontend
+        port:
+          number: 80
 
 #---

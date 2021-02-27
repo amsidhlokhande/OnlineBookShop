@@ -22,20 +22,29 @@ spec:
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
-  name: onlineshop-backend-virtual-service-account
+  name: onlineshop-backend-virtual-service
 spec:
   hosts:
-    - "*"
+  - "*"
   gateways:
-    - onlineshop-backend-gateway
+  - onlineshop-backend-gateway
   http:
-    - match:
-        - uri:
-            prefix: /onlineshop
-      route:
-        - destination:
-            host: onlineshop-backend
-            port:
-              number: 8181
+  - match:
+    - uri:
+        prefix: /onlineshop
+    - uri:
+        prefix: /onlineshop
+    - uri:
+        exact: /onlineshop
+    - uri:
+        exact: /h2-console   
+    - uri:
+        prefix: /h2-console 
+                 
+    route:
+    - destination:
+        host: onlineshop-backend
+        port:
+          number: 8181
 
 #---

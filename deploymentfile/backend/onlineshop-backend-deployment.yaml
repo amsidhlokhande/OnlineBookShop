@@ -47,4 +47,4 @@ spec:
       targetPort: 8181
   selector:
     app: onlineshop-backend
-  type: LoadBalancer  
+  type: ClusterIP  
