@@ -4,17 +4,12 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  labels:
-    app: onlineshop-backend
   name: onlineshop-backend
-  namespace: default
-
 spec:
   replicas: 1
   selector:
     matchLabels:
       app: onlineshop-backend
-
   template:
     metadata:
       labels:
@@ -24,18 +19,16 @@ spec:
         - name: onlineshop-backend
           image: adithilokhande/onlinebookshopbackend:0.0.1-SNAPSHOT
           imagePullPolicy: Always
+          resources:
+            limits:
+              memory: 512Mi
+              cpu: "1"
+            requests:
+              memory: 256Mi
+              cpu: "0.2"  
           ports:
             - containerPort: 8181
               protocol: TCP
-          env:
-            - name: GOOGLE_APPLICATION_CREDENTIALS
-              valueFrom:
-                configMapKeyRef:
-                  key: GOOGLE_APPLICATION_CREDENTIALS
-                  name: texttospeech-configmap
-          securityContext:
-            runAsUser: 1000
-      restartPolicy: Always
       terminationGracePeriodSeconds: 30
 
 ---
@@ -46,12 +39,12 @@ apiVersion: v1
 kind: Service
 metadata:
   name: onlineshop-backend
-  labels:
-    app: onlineshop-backend
-    service: onlineshop-backend-service     #To match with ServiceAccount metadata.label.account
+
 spec:
   ports:
     - port: 8181
-      name: http
+      protocol: TCP
+      targetPort: 8181
   selector:
     app: onlineshop-backend
+  type: LoadBalancer  
