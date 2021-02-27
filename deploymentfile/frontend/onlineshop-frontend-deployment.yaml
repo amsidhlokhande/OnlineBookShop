@@ -1,0 +1,57 @@
+####################################################
+#  OnlineShop FrontEnd Deployment
+####################################################
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: onlineshop-frontend
+  name: onlineshop-frontend
+  namespace: default
+
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: onlineshop-frontend
+
+  template:
+    metadata:
+      labels:
+        app: onlineshop-frontend
+    spec:
+      containers:
+        - name: onlineshop-frontend
+          image: adithilokhande/onlinebookshopfrontend:0.0.1-SNAPSHOT
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+          env:
+            - name: API_URL
+              value: http://onlinebookshopfrontend/onlineshop/books
+          securityContext:
+            runAsUser: 1000
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+
+---
+####################################################
+# OnlineShop Backend Service
+####################################################
+apiVersion: v1
+kind: Service
+metadata:
+  name: onlineshop-frontend
+  labels:
+    app: onlineshop-frontend
+    service: onlineshop-frontend-service     #To match with ServiceAccount metadata.label.account
+spec:
+  ports:
+    - port: 80
+      name: http
+      protocol: TCP
+      targetPort: 80
+
+  selector:
+    app: onlineshop-frontend

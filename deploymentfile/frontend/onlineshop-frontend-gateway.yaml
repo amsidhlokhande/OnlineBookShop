@@ -1,0 +1,41 @@
+#######################################################
+# OnlineShop Backend Gateway
+#######################################################
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: onlineshop-frontend-gateway
+spec:
+  selector:
+    istio: ingressgateway # use istio default controller
+  servers:
+    - port:
+        number: 80
+        name: http
+        protocol: HTTP
+      hosts:
+        - "*"
+---
+#######################################################
+# OnlineShop Backend Virtual Service Account
+#######################################################
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: onlineshop-frontend-virtual-service-account
+spec:
+  hosts:
+    - "*"
+  gateways:
+    - onlineshop-backend-gateway
+  http:
+    - match:
+        - uri:
+            prefix: /online-shop
+      route:
+        - destination:
+            host: onlineshop-frontend
+            port:
+              number: 8080
+
+#---
