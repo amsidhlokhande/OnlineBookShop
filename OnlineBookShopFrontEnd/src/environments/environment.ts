@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: window["env"]["apiUrl"] || "http://localhost:8282/onlineshop/books",
+  apiUrl: window["env"]["apiUrl"] || "",
   debug: window["env"]["debug"] || false
 
 };

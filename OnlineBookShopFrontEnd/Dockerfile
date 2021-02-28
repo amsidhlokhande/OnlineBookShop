@@ -1,5 +1,6 @@
 ### STAGE 1: Build ###
 FROM node:latest AS build-step
+ENV NPM_CONFIG_LOGLEVEL warn
 WORKDIR /app
 COPY . .
 RUN npm install
