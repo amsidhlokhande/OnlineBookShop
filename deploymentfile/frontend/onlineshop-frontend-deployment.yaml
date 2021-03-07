@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: onlineshop-frontend
-        image: adithilokhande/onlinebookshopfrontend:v3
+        image: adithilokhande/onlinebookshopfrontend:0.0.1-SNAPSHOT
         imagePullPolicy: Always
         resources:
           limits:
@@ -30,7 +30,7 @@ spec:
         - containerPort: 8080
         env:
           - name: API_URL
-            value: http://34.68.165.208/onlineshop/books
+            value: http://146.148.74.207/onlineshop/books
               
 ---
 
@@ -44,7 +44,6 @@ metadata:
 spec:
   selector:
     app: onlineshop-frontend
-
   ports:
   - port: 80
     protocol: TCP

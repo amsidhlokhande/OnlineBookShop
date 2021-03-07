@@ -4,7 +4,7 @@ ENV NPM_CONFIG_LOGLEVEL warn
 WORKDIR /app
 COPY . .
 RUN npm install
-RUN npm run build --prod
+RUN npm run build -- --prod
 
 ### STAGE 2: Run ###
 FROM nginx:latest
