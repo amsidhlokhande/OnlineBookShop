@@ -31,16 +31,9 @@ spec:
   http:
   - match:
     - uri:
-        prefix: /onlineshop
+        prefix: /onlineshop/books
     - uri:
-        prefix: /onlineshop
-    - uri:
-        exact: /onlineshop
-    - uri:
-        exact: /h2-console   
-    - uri:
-        prefix: /h2-console 
-                 
+        prefix: /h2-console
     route:
     - destination:
         host: onlineshop-backend

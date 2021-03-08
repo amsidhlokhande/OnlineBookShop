@@ -30,7 +30,7 @@ spec:
         - containerPort: 8080
         env:
           - name: API_URL
-            value: http://146.148.74.207/onlineshop/books
+            value: http://34.67.146.248/onlineshop/books
               
 ---
 

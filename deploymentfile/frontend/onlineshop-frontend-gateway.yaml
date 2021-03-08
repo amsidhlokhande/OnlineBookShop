@@ -30,8 +30,10 @@ spec:
   - "*"
   http:
   - match:
-    - uri:
-        prefix: /onlineshop-ui
+      - uri:
+          prefix: /onlineshop-ui
+      - uri:
+          regex: '^.*\.(ico|png|jpg|jpeg|css|js)$'
     route:
     - destination:
         host: onlineshop-frontend
