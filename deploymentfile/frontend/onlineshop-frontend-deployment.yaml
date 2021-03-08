@@ -30,12 +30,12 @@ spec:
         - containerPort: 8080
         env:
           - name: API_URL
-            value: http://34.67.146.248/onlineshop/books
+            value: http://35.232.235.87/onlineshop/books
               
 ---
 
 ####################################################
-# OnlineShop Backend Service
+# OnlineShop FrontEnd Service
 ####################################################
 apiVersion: v1
 kind: Service
